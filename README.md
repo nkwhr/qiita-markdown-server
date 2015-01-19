@@ -1,4 +1,4 @@
-#　Qiita Markdown Server
+# Qiita Markdown Server
 
 A REST API Markdown Server powered by [Qiita::Markdown](https://github.com/increments/qiita-markdown)
 
