@@ -1,6 +1,10 @@
 class QiitaMarkdownServer < Sinatra::Base
   set public_folder: 'public', static: true
 
+  before do
+    headers 'Access-Control-Allow-Origin' => '*'
+  end
+
   post '/markdown' do
     request_json? || invalid_media_type
     @text = decoded_params[:text] || missing_attribute
