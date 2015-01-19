@@ -3,6 +3,7 @@ class QiitaMarkdownServer < Sinatra::Base
 
   before do
     headers 'Access-Control-Allow-Origin' => '*'
+    unsupported_accept_header unless request.accept? 'application/json'
   end
 
   post '/markdown' do
@@ -65,6 +66,12 @@ class QiitaMarkdownServer < Sinatra::Base
 
   def invalid_media_type
     @message = { message: "Invalid request media type (expecting '#{@expected}')" }
+    render_error 415
+  end
+
+  def unsupported_accept_header
+    accepted = request.accept.map{ |t| "\"#{t}\"" }.join(', ')
+    @message = { message: "Unsupported 'Accept' header: [#{accepted}]. Must accept 'application/json'." }
     render_error 415
   end
 
