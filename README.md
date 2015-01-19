@@ -21,7 +21,7 @@ options     | hash    | Context options (see [qiita-markdown#context](https://gi
 
 #### Example
 ```
-curl -X POST -H 'Content-Type: application/json' -d '
+$ curl -X POST -H 'Content-Type: application/json' -d '
 {
   "text": "Hello my twitter ID is @_nao8 :smile:",
   "options": {
@@ -134,10 +134,24 @@ or
 $ PORT=8080 foreman start
 ```
 
+## Running with Docker
+
+Latest Docker image is available at [nkwhr/qiita-markdown-server](https://registry.hub.docker.com/u/nkwhr/qiita-markdown-server/)
+
+### Example
+
+```
+$ export MYGLOBALIP=$(curl -s http://ifconfig.me)
+$ docker run \
+    --rm \
+    --env WEB_CONCURRENCY=$(nproc) \
+    --env ASSET_ROOT=http://${MYGLOBALIP}:8080/images \
+    -p 8080:8080 \
+    nkwhr/qiita-markdown-server
+```
+
 ## See Also
 
-- [nkwhr/qiita-markdown-server]()
-  - Docker images for this application
 - [Qiita::Markdown](https://github.com/increments/qiita-markdown)
 
 
