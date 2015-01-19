@@ -1,0 +1,23 @@
+{
+  "name": "Qiita Markdown Server",
+  "description": "A REST API Markdown Server powered by Qiita::Markdown.",
+  "repository": "https://github.com/nkwhr/qiita-markdown-server",
+  "scripts": {
+    "postdeploy": "bundle exec rake -f vendor/bundle/ruby/2.0.0/gems/gemoji-*/lib/tasks/emoji.rake emoji"
+  },
+  "env": {
+    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-multi.git",
+    "WEB_CONCURRENCY": {
+      "description": "The number of web processes to run.",
+      "value": "1"
+    },
+    "ASSET_ROOT": {
+      "description": "Asset URL for Emoji images.",
+      "value": "https://name-of-this-app.herokuapp.com/images"
+    },
+    "BASE_URL": {
+      "description": "Base URL for user mentions.",
+      "value": "https://twitter.com"
+    }
+  }
+}
