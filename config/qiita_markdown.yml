@@ -1,0 +1,9 @@
+development:
+  asset_root: 'http://localhost:8080/images'
+
+test:
+  asset_root: 'http://localhost:8080/images'
+
+production:
+  asset_root: <%= ENV['ASSET_ROOT'] %>
+  base_url: <%= ENV['BASE_URL'] %>

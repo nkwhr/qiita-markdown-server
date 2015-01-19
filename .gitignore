@@ -1,0 +1,9 @@
+/.bundle
+/vendor/bundle
+/log/*.log
+/tmp
+/public/images/emoji
+.DS_Store
+.Spotlight-V100
+.Trashes
+.env
