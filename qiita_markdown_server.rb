@@ -20,12 +20,12 @@ class QiitaMarkdownServer < Sinatra::Base
 
   def request_json?
     @expected = 'application/json'
-    request.content_type == @expected
+    request.media_type == @expected
   end
-  #
+
   def request_text?
     @expected = 'text/plain'
-    (request.content_type == @expected || request.content_type == 'text/x-markdown')
+    (request.media_type == @expected || request.media_type == 'text/x-markdown')
   end
 
   def raw_body
