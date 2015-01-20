@@ -1,5 +1,7 @@
 # Qiita Markdown Server
 
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/nkwhr/qiita-markdown-server)
+
 A REST API Markdown Server powered by [Qiita::Markdown](https://github.com/increments/qiita-markdown)
 
 ## Description
