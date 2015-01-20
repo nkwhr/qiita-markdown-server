@@ -37,7 +37,11 @@ class QiitaMarkdownServer < Sinatra::Base
   end
 
   def decoded_params
-    @decoded_params ||= JSON.parse(raw_body, symbolize_names: true) rescue json_parse_failed
+    @decoded_params ||= begin
+                          JSON.parse(raw_body, symbolize_names: true)
+                        rescue
+                          json_parse_failed
+                        end
   end
 
   def options
@@ -45,7 +49,11 @@ class QiitaMarkdownServer < Sinatra::Base
   end
 
   def process_markdown(options = {})
-    result = QMKDN.call(@text, options) rescue process_failed
+    result = begin
+               QMKDN.call(@text, options)
+             rescue
+               process_failed
+             end
     result[:output].to_s
   end
 
