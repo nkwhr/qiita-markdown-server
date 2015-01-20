@@ -36,8 +36,10 @@ $ curl -X POST -H 'Content-Type: application/json' -d '
 #### Response Header
 
 ```
-HTTP/1.1 200 OK
+HTTP/1.0 200 OK
 Content-Type: text/html;charset=utf-8
+Content-Length: 262
+Access-Control-Allow-Origin: *
 ```
 
 #### Response Body
@@ -62,8 +64,10 @@ $ curl -X POST -H 'Content-Type: text/plain' -d '
 #### Response Header
 
 ```
-HTTP/1.1 200 OK
+HTTP/1.0 200 OK
 Content-Type: text/html;charset=utf-8
+Content-Length: 342
+Access-Control-Allow-Origin: *
 ```
 
 #### Response Body
