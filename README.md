@@ -5,6 +5,7 @@
 A REST API Markdown Server powered by [Qiita::Markdown](https://github.com/increments/qiita-markdown)
 
 ## Description
+
 Qiita Markdown Server provides API to render Markdown texts posted via HTTP and responds with rendered HTML elements.
 APIs are (mostly) compatible with [GitHub Markdown API](https://developer.github.com/v3/markdown/).
 
@@ -18,10 +19,11 @@ This API renders Markdown text in the `text` attribute. Request parameter must b
 
 Name        | Type    | Description
 ------------| ------- | -----------------------------
-text        | string  | The Markdown text to render
+text        | string  | The Markdown text to render (**Required**)
 options     | hash    | Context options (see [qiita-markdown#context](https://github.com/increments/qiita-markdown#context) for details)
 
 #### Example
+
 ```
 $ curl -X POST -H 'Content-Type: application/json' -d '
 {
@@ -127,13 +129,14 @@ Then Emoji images will be copied into `$APP_ROOT/public/images/emoji`.
 ```
 export RACK_ENV=production
 export WEB_CONCURRENCY=1                       # worker processes, default: 2
-export ASSET_URL=http://localhost:8080/images  # url for emoji images
+export ASSET_ROOT=http://localhost:8080/images # url for emoji images
 export BASE_URL=https://twitter.com            # url for @username
 ```
 
 You can also use [dotenv](https://github.com/bkeepers/dotenv) if you are going to run app with [foreman](https://github.com/ddollar/foreman).
 
 ### 5. Start Application
+
 ```
 $ bundle exec rackup -s Rhebok -O ConfigFile=config/rhebok.rb -p 8080 config.ru
 or
@@ -147,11 +150,10 @@ Latest Docker image is available at [nkwhr/qiita-markdown-server](https://regist
 ### Example
 
 ```
-$ export MYGLOBALIP=$(curl -s http://ifconfig.me)
 $ docker run \
     --rm \
     --env WEB_CONCURRENCY=$(nproc) \
-    --env ASSET_ROOT=http://${MYGLOBALIP}:8080/images \
+    --env ASSET_ROOT=http://example.com/images \
     -p 8080:8080 \
     nkwhr/qiita-markdown-server
 ```
