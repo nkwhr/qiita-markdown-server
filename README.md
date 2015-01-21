@@ -103,25 +103,12 @@ $ bundle install
 ### 3. Install Emoji (optional)
 
 If you want to serve assets on a same server, you can install Emoji images with [gemoji](https://github.com/github/gemoji).
-Asset URL can be set with environment variable `ASSET_ROOT`.
-
-#### 3.1. Find Gem install path
-
-look at `GEM PATHS:`
+Run following Rake task to copy images into `public/images/emoji`.
 
 ```
-$ bundle exec gem env
+$ bundle exec rake -f $(gem contents gemoji | grep 'emoji\.rake') emoji
 ```
-
-#### 3.2. Run Rake task to install Emoji
-
-For example, when Gems are installed in `~/.rbenv/versions/2.1.3/lib/ruby/gems/2.1.0`, you should run the following command:
-
-```
-$ bundle exec rake -f ~/.rbenv/versions/2.1.3/lib/ruby/gems/2.1.0/gems/gemoji-*/lib/tasks/emoji.rake emoji
-```
-
-Then Emoji images will be copied into `$APP_ROOT/public/images/emoji`.
+Asset host can be set with environment variable `ASSET_ROOT`.
 
 
 ### 4. Set environment variables (optional)
