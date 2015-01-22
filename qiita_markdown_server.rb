@@ -90,7 +90,7 @@ class QiitaMarkdownServer < Sinatra::Base
 
   def render_error(code)
     content_type :json
-    halt code, JSON.pretty_generate(@message)
+    halt code, JSON.pretty_generate(@message) + "\n"
   end
 
   not_found do
