@@ -7,6 +7,13 @@ class QiitaMarkdownServer < Sinatra::Base
     validate_request_media_type!
   end
 
+  README = File.read('README.md').freeze
+
+  get '/' do
+    @readme = process_markdown(README.gsub(/localhost:8080/, request.host))
+    erb :index
+  end
+
   post '/markdown' do
     text = decoded_params[:text] || missing_attribute
     process_markdown(text, options)

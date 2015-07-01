@@ -22,6 +22,13 @@ describe 'Markdown Resources' do
     JSON.parse(subject.body)['message']
   end
 
+  describe 'GET /' do
+    it 'should return 200' do
+      get '/'
+      expect(last_response.status).to eq(200)
+    end
+  end
+
   describe 'POST /markdown' do
     let(:params) do
       { text: 'foobar あいうえお' }
@@ -169,6 +176,16 @@ describe 'Markdown Resources' do
 
   describe 'POST /not_found' do
     subject { post '/not_found' }
+
+    it { should_not be_ok }
+    it { expect(subject.status).to eq(404) }
+    it 'should return an error message' do
+      expect(message).to eq('Not Found')
+    end
+  end
+
+  describe 'GET /not_found' do
+    subject { get '/not_found' }
 
     it { should_not be_ok }
     it { expect(subject.status).to eq(404) }
