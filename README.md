@@ -29,7 +29,7 @@ $ curl -X POST -H 'Content-Type: application/json' -d '
 {
   "text": "Hello my twitter ID is @_nao8 :smile:",
   "options": {
-    "asset_root": "http://localhost:8080/images",
+    "asset_root": "https://assets-cdn.github.com/images/icons",
     "base_url": "https://twitter.com"
   }
 }' http://localhost:8080/markdown
@@ -40,14 +40,14 @@ $ curl -X POST -H 'Content-Type: application/json' -d '
 ```
 HTTP/1.1 200 OK
 Content-Type: text/html;charset=utf-8
-Content-Length: 262
+Content-Length: 276
 Access-Control-Allow-Origin: *
 ```
 
 #### Response Body
 
 ```
-<p>Hello my twitter ID is <a href="https://twitter.com/_nao8" class="user-mention" title="_nao8">@_nao8</a> <img class="emoji" title=":smile:" alt=":smile:" src="http://localhost:8080/images/emoji/unicode/1f604.png" height="20" width="20" align="absmiddle"></p>
+<p>Hello my twitter ID is <a href="https://twitter.com/_nao8" class="user-mention" title="_nao8">@_nao8</a> <img class="emoji" title=":smile:" alt=":smile:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f604.png" height="20" width="20" align="absmiddle"></p>
 ```
 
 ### 2. POST /markdown/raw
@@ -140,7 +140,7 @@ Latest Docker image is available at [nkwhr/qiita-markdown-server](https://regist
 $ docker run \
     --rm \
     --env WEB_CONCURRENCY=$(nproc) \
-    --env ASSET_ROOT=http://example.com/images \
+    --env ASSET_ROOT=https://assets-cdn.github.com/images/icons \
     -p 8080:8080 \
     nkwhr/qiita-markdown-server
 ```
