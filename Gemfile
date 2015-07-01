@@ -1,8 +1,8 @@
 source 'https://rubygems.org/'
 
 gem 'sinatra', '~> 1.4'
-gem 'qiita-markdown', '~> 0.2.1'
-gem 'rhebok', '~> 0.8.0'
+gem 'qiita-markdown', '~> 0.8.0'
+gem 'rhebok', '~> 0.8.6'
 
 group :development do
   gem 'rake', '~> 10.0'
