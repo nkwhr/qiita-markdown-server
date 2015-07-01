@@ -4,28 +4,34 @@ class QiitaMarkdownServer < Sinatra::Base
   before do
     headers 'Access-Control-Allow-Origin' => '*'
     unsupported_accept_header unless request.accept? 'application/json'
+    validate_request_media_type!
   end
 
   post '/markdown' do
-    request_json? || invalid_media_type
-    @text = decoded_params[:text] || missing_attribute
-    process_markdown(options)
+    text = decoded_params[:text] || missing_attribute
+    process_markdown(text, options)
   end
 
   post '/markdown/raw' do
-    request_text? || invalid_media_type
-    @text = encoded_body
-    process_markdown
+    text = encoded_body
+    process_markdown(text)
   end
 
-  def request_json?
-    @expected = 'application/json'
-    request.media_type == @expected
-  end
+  private
 
-  def request_text?
-    @expected = 'text/plain'
-    (request.media_type == @expected || request.media_type == 'text/x-markdown')
+  def validate_request_media_type!
+    expected =
+      case request.path_info
+      when '/markdown'
+        ['application/json']
+      when '/markdown/raw'
+        ['text/plain', 'text/x-markdown']
+      else
+        return
+      end
+
+    expected.include?(request.media_type) || \
+      invalid_media_type_not(expected.join(' or '))
   end
 
   def raw_body
@@ -48,9 +54,9 @@ class QiitaMarkdownServer < Sinatra::Base
     decoded_params[:options] || {}
   end
 
-  def process_markdown(options = {})
+  def process_markdown(text = nil, options = {})
     result = begin
-               QMKDN.call(@text, options)
+               QMKDN.call(text, options)
              rescue
                process_failed
              end
@@ -58,39 +64,39 @@ class QiitaMarkdownServer < Sinatra::Base
   end
 
   def process_failed
-    @message = { message: "Processing failed. Probably invalid format in 'options'" }
-    render_error 400
+    message = { message: "Processing failed. Probably invalid format in 'options'" }
+    render_error(message, 400)
   end
 
   def json_parse_failed
-    @message = { message: 'Problems parsing JSON' }
-    render_error 400
+    message = { message: 'Problems parsing JSON' }
+    render_error(message, 400)
   end
 
   def endpoint_not_found
-    @message = { message: 'Not Found' }
-    render_error 404
+    message = { message: 'Not Found' }
+    render_error(message, 404)
   end
 
-  def invalid_media_type
-    @message = { message: "Invalid request media type (expecting '#{@expected}')" }
-    render_error 415
+  def invalid_media_type_not(expected)
+    message = { message: "Invalid request media type (expecting '#{expected}')" }
+    render_error(message, 415)
   end
 
   def unsupported_accept_header
-    accepted = request.accept.map{ |t| "\"#{t}\"" }.join(', ')
-    @message = { message: "Unsupported 'Accept' header: [#{accepted}]. Must accept 'application/json'." }
-    render_error 415
+    accepted = request.accept.map { |t| "\"#{t}\"" }.join(', ')
+    message = { message: "Unsupported 'Accept' header: [#{accepted}]. Must accept 'application/json'." }
+    render_error(message, 415)
   end
 
   def missing_attribute
-    @message = { message: "Missing or invalid 'text' attribute in JSON request" }
-    render_error 422
+    message = { message: "Missing or invalid 'text' attribute in JSON request" }
+    render_error(message, 422)
   end
 
-  def render_error(code)
+  def render_error(message, code)
     content_type :json
-    halt code, JSON.pretty_generate(@message) + "\n"
+    halt code, JSON.pretty_generate(message) + "\n"
   end
 
   not_found do

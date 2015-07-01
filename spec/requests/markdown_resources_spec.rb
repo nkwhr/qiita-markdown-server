@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'Markdown Resources' do
-
   shared_examples 'API Response' do
     it 'should have correct headers' do
       expect(subject.header['Access-Control-Allow-Origin']).to eq('*')
@@ -151,7 +150,7 @@ describe 'Markdown Resources' do
       it_behaves_like 'API Error Response'
       it { expect(subject.status).to eq(415) }
       it 'should return an error message' do
-        expect(message).to eq("Invalid request media type (expecting 'text/plain')")
+        expect(message).to eq("Invalid request media type (expecting 'text/plain or text/x-markdown')")
       end
     end
 
@@ -166,7 +165,6 @@ describe 'Markdown Resources' do
         expect(message).to eq("Unsupported 'Accept' header: [\"text/plain\"]. Must accept 'application/json'.")
       end
     end
-
   end
 
   describe 'POST /not_found' do
