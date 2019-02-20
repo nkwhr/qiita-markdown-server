@@ -1,9 +1,12 @@
 development:
   asset_root: 'http://localhost:8080/images'
+  hostname:   'http://localhost:8080'
 
 test:
   asset_root: 'http://localhost:8080/images'
+  hostname:   'http://localhost:8080'
 
 production:
   asset_root: <%= ENV['ASSET_ROOT'] %>
   base_url: <%= ENV['BASE_URL'] %>
+  hostname: <%= ENV['HOSTNAME'] %>
