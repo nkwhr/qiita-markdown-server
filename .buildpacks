@@ -1,2 +1,2 @@
-https://github.com/rcaught/heroku-buildpack-cmake
-https://codon-buildpacks.s3.amazonaws.com/buildpacks/frederick/heroku-buildpack-ruby.tgz
+https://github.com/platform45/heroku-buildpack-cmake
+https://github.com/heroku/heroku-buildpack-ruby.git
