@@ -115,6 +115,7 @@ Asset host can be set with environment variable `ASSET_ROOT`.
 
 ```
 export RACK_ENV=production
+export HOSTNAME=http://localhost:8080          # FQDN, required
 export WEB_CONCURRENCY=1                       # worker processes, default: 2
 export ASSET_ROOT=http://localhost:8080/images # url for emoji images
 export BASE_URL=https://twitter.com            # url for @username
