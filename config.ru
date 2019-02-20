@@ -1,6 +1,8 @@
 # Load path and gems/bundler
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__))
 
+ENV['SINATRA_ACTIVESUPPORT_WARNING'] = 'false'
+
 require 'bundler'
 Bundler.require
 
