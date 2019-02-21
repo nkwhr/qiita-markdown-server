@@ -4,6 +4,7 @@
   "repository": "https://github.com/nkwhr/qiita-markdown-server",
   "env": {
     "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-multi.git",
-    "ASSET_ROOT": "https://assets-cdn.github.com/images/icons"
+    "ASSET_ROOT": "https://assets-cdn.github.com/images/icons",
+    "HOSTNAME": "https://<replace-with-your-app-name>.herokuapp.com"
   }
 }
